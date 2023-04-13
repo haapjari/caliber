@@ -30,3 +30,20 @@ Caliber is a command-line tool, which provides insights on a `.git` repository.
 - TBD
 
 ---
+
+## Insights
+
+- NLOC
+- Library NLOC
+- Commit Insights 
+- Clean Code (gofmt, goimports)
+
+---
+
+## TODO
+
+- Command-Line Interface
+- Graphical User Interface
+- Report
+
+---
