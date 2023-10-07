@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/haapjari/caliber/pkg/cli"
+	"github.com/haapjari/caliber/pkg/ui"
 )
 
 func main() {
-	cli.Create()
+	ui.Create()
 }
