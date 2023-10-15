@@ -1,22 +1,33 @@
 package ui
 
-import "fmt"
+import (
+	"os"
+
+	"github.com/haapjari/caliber/pkg/log"
+)
+
+type UserInterface interface {
+	Close() error
+	Listener()
+}
 
 // CommandLineInterface defines a new interface.
 type CommandLineInterface struct {
 	version int
 }
 
-// New is a constructor.
-func NewCommandLineInterface() *CommandLineInterface {
+func New() *CommandLineInterface {
 	return &CommandLineInterface{
 		version: 1,
 	}
 }
 
-// Create returns a new command-line interface.
-func Create() {
-	fmt.Println("Command-Line Interface")
-	c := NewCommandLineInterface()
-	fmt.Println(c.version)
+func init() {}
+
+func (c *CommandLineInterface) Listen() {
+	for _, arg := range os.Args {
+		if arg == "-h" || arg == "--help" {
+			log.Info("help")
+		}
+	}
 }
