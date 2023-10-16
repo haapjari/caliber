@@ -1,9 +1,53 @@
 # Caliber
 
-Caliber is a command-line tool, which provides insights on a `.git` repository.
+- Caliber will be a linter utility which will be able to analyze Go programs and flag problematic third-party dependencies, outputting report. 
+- Caliber can be run locally, or for example, within a CI/CD pipeline.
 
-- Objective of `Caliber` is to provide insights on a `.git` repository.
-- Objective is also to create a `Viewer` -tool, a Web Application, which can be used to view the reports.
+## Author
+
+- I am Jari "Haspe" Haapasaari. I am passionate about Software Quality, and this is an attempt to create a tool which will help me and others to improve the quality of their software. 
+
+## Version
+
+- Every commit is tagged as a version number which is read from the git, and the version number is updated in the `Makefile` as well as the `Dockerfile`.
+
+## Example Report
+
+```json
+{
+    "project": "project",
+    "report": [
+        {
+            "dependency": "url",
+            "details": {
+                "name": "example",
+                "version": "0.0.1",
+                "lastUpdated": "2021-01-01",
+                "supportLevel": "high",
+                "activity": "low",
+                "popularity": "high",
+                "license": "MIT",
+                "vulnerabilityTrend": "medium",
+                "transitiveDependencies": "high"
+            }
+        },
+        {
+            "dependency": "url",
+            "details": {
+                "name": "example",
+                "version": "0.0.1",
+                "lastUpdated": "2021-01-01",
+                "supportLevel": "high",
+                "activity": "low",
+                "popularity": "high",
+                "license": "MIT",
+                "vulnerabilityTrend": "medium",
+                "transitiveDependencies": "high"
+            }
+        }
+    ]
+}
+```
 
 ---
 
@@ -11,15 +55,19 @@ Caliber is a command-line tool, which provides insights on a `.git` repository.
 
 - TBD
 
+### Config
+
+- Config can be loaded from a file, or passed in as a flag. Caliber searchs for a `.caliber.yml` file in the current working directory, and if it is not found, it will use the default config.
+
+```yaml
+exclude:
+    - "github.com/example/example"
+    - "github.com/example/example"
+```
+
 ---
 
 ## How-To: Contribute
-
-- TBD
-
----
-
-## How-To: Develop
 
 - TBD
 
@@ -31,19 +79,85 @@ Caliber is a command-line tool, which provides insights on a `.git` repository.
 
 ---
 
-## Insights
+## Notes
 
-- NLOC
-- Library NLOC
-- Commit Insights 
-- Clean Code (gofmt, goimports)
+- Command-Line Interface
+- Exclude Standard Library
+- Support Level: What level of Support is available for this library?
+- Activity: Is the library actively developed?
+    - Commit Insights
+    - Contributor Count (Recentness)
+    - Releases
+- Popularity: How many people use this library?
+    - Stargazers, if this is a GitHub hosted repository.
+- License: What kind of licensing does this library have?
+- Vulnerability: Has there been a trend of vulnerabilities with this library?
+- Maintainability: Does the library have a lot of transitive dependencies?
+- Activity
+    - Commit Insights 
+    - Contributor Count
+- Maturity
+    - Creation Date
+    - Contributor Count
+- How-To: Generate Reports (?)
+- Local DB: 
+    - (Redis)
+- Centralized Database
+    - Update Definitions Functionality
 
 ---
 
-## TODO
+## Commands
 
-- Command-Line Interface
-- Graphical User Interface
-- Report
+### Run
+
+Run, with default config and output to stdout.
+
+```bash
+    caliber run path=<path_to_project>
+```
+
+Run, with custom config and output to stdout.
+
+```bash
+    caliber run path=<path_to_project> load=<path_to_config>
+```
+
+Run, with default config and output to file.
+
+```bash
+    caliber run path=<path_to_project> output=<output_file_path>.json
+```
+
+Run with custom config and output to file. (load and output can be in any order)
+
+```bash
+    caliber run path=<path_to_project> load=<path_to_config> output=<output_file_path>.json
+```
+
+### Version 
+
+Version of Caliber.
+
+```bash
+    caliber version
+```
+
+### Help
+
+Help for Caliber.
+
+```bash
+    caliber help
+```
+
+---
+
+## Features
+
+- Headless: Run as a Comnmand-Line Utility, Generates Report.
+- Graphical User Interface (HTMX and Go)
+- Performance Metrics from Analysis
+- External, mountable config.
 
 ---
