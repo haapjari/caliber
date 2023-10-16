@@ -1,7 +1,15 @@
 # Caliber
 
-- Caliber will be a linter utility which will be able to analyze Go programs and flag problematic third-party dependencies, outputting a `json` report. 
+- Caliber will be a linter utility which will be able to analyze Go programs and flag problematic third-party dependencies, outputting report. 
 - Caliber can be run locally, or for example, within a CI/CD pipeline.
+
+## Author
+
+- I am Jari "Haspe" Haapasaari. I am passionate about Software Quality, and this is an attempt to create a tool which will help me and others to improve the quality of their software. 
+
+## Version
+
+- Every commit is tagged as a version number which is read from the git, and the version number is updated in the `Makefile` as well as the `Dockerfile`.
 
 ## Example Report
 
@@ -47,10 +55,14 @@
 
 - TBD
 
-### Required Configuraton Variables
+### Config
 
-```
-VERSION=
+- Config can be loaded from a file, or passed in as a flag. Caliber searchs for a `.caliber.yml` file in the current working directory, and if it is not found, it will use the default config.
+
+```yaml
+exclude:
+    - "github.com/example/example"
+    - "github.com/example/example"
 ```
 
 ---
@@ -97,11 +109,47 @@ VERSION=
 
 ## Commands
 
-- Help: `caliber -help`
-- Load Config File (Default Without Arguments): `caliber -load`
-- Version: `caliber -version`
-- Update Definitions: `caliber -update`
-- Run Linter: `caliber -run`, with args `--path=<path_to_project>``--output=<output_file_path>.json` 
+### Run
+
+Run, with default config and output to stdout.
+
+```bash
+    caliber run path=<path_to_project>
+```
+
+Run, with custom config and output to stdout.
+
+```bash
+    caliber run path=<path_to_project> load=<path_to_config>
+```
+
+Run, with default config and output to file.
+
+```bash
+    caliber run path=<path_to_project> output=<output_file_path>.json
+```
+
+Run with custom config and output to file. (load and output can be in any order)
+
+```bash
+    caliber run path=<path_to_project> load=<path_to_config> output=<output_file_path>.json
+```
+
+### Version 
+
+Version of Caliber.
+
+```bash
+    caliber version
+```
+
+### Help
+
+Help for Caliber.
+
+```bash
+    caliber help
+```
 
 ---
 

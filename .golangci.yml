@@ -15,8 +15,6 @@ linters:
     - errchkjson
     - errorlint
     - exhaustive
-    - exhaustivestruct
-    - exhaustruct
     - forbidigo
     - funlen
     - gci
@@ -56,7 +54,6 @@ linters:
     - nilnil
     - nlreturn
     - nolintlint
-    - nonamedreturns
     - paralleltest
     - prealloc
     - predeclared
@@ -75,7 +72,6 @@ linters:
     - unparam
     - unused
     - varcheck
-    - varnamelen
     - whitespace
 
 linters-settings:
