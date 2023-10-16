@@ -4,10 +4,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/haapjari/caliber/pkg/ui"
+	"github.com/haapjari/caliber/internal/pkg/log"
+	"github.com/haapjari/caliber/internal/pkg/ui"
 )
 
-func TestListener(t *testing.T) {
+func TestListen(_ *testing.T) {
+	log.NewLogger()
 	ui.New().Listen()
 	os.Args = append(os.Args, "--help")
 

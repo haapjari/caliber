@@ -1,5 +1,7 @@
+// Package log provides a simple interface for logging.
 package log
 
+// Logger is the interface for the logger.
 type Logger interface {
 	Debug(message string)
 	Debugf(format string, args ...interface{})
@@ -11,34 +13,42 @@ type Logger interface {
 	Fatalf(format string, args ...interface{})
 }
 
+// Debug logs a debug message.
 func Debug(message string) {
 	Log.Debug(message)
 }
 
+// Debugf logs a formatted debug message.
 func Debugf(format string, args ...interface{}) {
 	Log.Debugf(format, args...)
 }
 
+// Info logs an info message.
 func Info(message string) {
 	Log.Info(message)
 }
 
+// Infof logs a formatted info message.
 func Infof(format string, args ...interface{}) {
 	Log.Infof(format, args...)
 }
 
+// Error logs an error message.
 func Error(message string) {
 	Log.Error(message)
 }
 
+// Errorf logs a formatted error message.
 func Errorf(format string, args ...interface{}) {
 	Log.Errorf(format, args...)
 }
 
+// Fatal logs a fatal message.
 func Fatal(message string) {
 	Log.Fatal(message)
 }
 
+// Fatalf logs a formatted fatal message.
 func Fatalf(format string, args ...interface{}) {
 	Log.Fatalf(format, args...)
 }

@@ -97,12 +97,11 @@ VERSION=
 
 ## Commands
 
-- Generate Config File: `caliber init`
-- Pull Definitions: `caliber --pull-local` or `caliber --pull-central`
-- Push Definitions: `caliber --push-local` or `caliber --push-central`
-- Run Linter: `caliber --output=<output_file_path.json> --path=<path_to_project> run` 
-- Help: `caliber --help` or `caliber -h`
-- Version: `caliber --version` or `caliber -v`
+- Help: `caliber -help`
+- Load Config File (Default Without Arguments): `caliber -load`
+- Version: `caliber -version`
+- Update Definitions: `caliber -update`
+- Run Linter: `caliber -run`, with args `--path=<path_to_project>``--output=<output_file_path>.json` 
 
 ---
 
