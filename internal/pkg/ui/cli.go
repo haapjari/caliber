@@ -3,8 +3,10 @@ package ui
 
 import (
 	"flag"
+	"strings"
 	"sync"
 
+	"github.com/haapjari/caliber/internal/pkg/config"
 	"github.com/haapjari/caliber/internal/pkg/log"
 )
 
@@ -16,16 +18,24 @@ type UserInterface interface {
 
 // CommandLineInterface is the command line interface for the application.
 type CommandLineInterface struct {
-	version string
-	mu      sync.Mutex
+	sync.Mutex
+
+	cfg *config.Config
 }
 
 // New returns a new CommandLineInterface.
 func New() *CommandLineInterface {
-	return &CommandLineInterface{
-		version: "0.0.1", // TODO: Get version from git tag
-		mu:      sync.Mutex{},
+	cfg, err := config.New()
+	if err != nil {
+		log.Fatal(err.Error())
 	}
+
+	commandLineInterface := &CommandLineInterface{
+		Mutex: sync.Mutex{},
+		cfg:   cfg,
+	}
+
+	return commandLineInterface
 }
 
 func init() {}
@@ -35,49 +45,63 @@ func (c *CommandLineInterface) Listen() {
 	var (
 		help    = flag.Bool("help", false, "Display Help")
 		version = flag.Bool("version", false, "Display Version")
-		load    = flag.Bool("load", false, "Load Config")
-		update  = flag.Bool("update", false, "Update Definitions")
+		run     = flag.Bool("run", false, "Run the command")
 	)
 
 	flag.Parse()
 
-	// TODO: Add support for commands
 	if *help {
-		log.Info("TODO")
-
+		log.Info("Displaying Help...")
 		flag.PrintDefaults()
-
 		return
 	}
 
-	// TODO: Add support for commands
 	if *version {
 		log.Infof("Caliber Version: %v", c.GetVersion())
-
 		return
 	}
 
-	// TODO: Add support for commands
-	if *load {
-		log.Info("TODO")
+	if *run {
+		args := flag.Args()
+		if len(args) < 2 { // We ignore the 'run' command, so at least 2 arguments are needed
+			log.Error("Error: Project path is required for the run command.")
+			return
+		}
 
+		projectPath := args[1]
+		var loadPath, outputPath string
+
+		if len(args) > 2 {
+			secondArg := args[2]
+			if strings.HasSuffix(secondArg, ".json") {
+				outputPath = secondArg
+			} else {
+				loadPath = secondArg
+			}
+		}
+
+		if len(args) > 3 {
+			outputPath = args[3]
+		}
+
+		// Handle the paths
+		log.Infof("Project Path: %v", projectPath)
+		if loadPath != "" {
+			log.Infof("Load Path: %v", loadPath)
+		}
+		if outputPath != "" {
+			log.Infof("Output Path: %v", outputPath)
+		}
 		return
 	}
 
-	// TODO: Add support for commands
-	if *update {
-		log.Info("TODO")
-
-		return
-	}
-
-	log.Info("Command Not Supported")
+	log.Error("Command Not Supported")
 }
 
 // GetVersion returns the version of the application.
 func (c *CommandLineInterface) GetVersion() string {
-	c.mu.Lock()
-	defer c.mu.Unlock()
+	c.Mutex.Lock()
+	defer c.Mutex.Unlock()
 
-	return c.version
+	return c.cfg.Version
 }
