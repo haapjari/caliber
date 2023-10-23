@@ -17,6 +17,7 @@ func main() {
 	run := commands.NewRunCommand(os.Stdout)
 
 	root.AddCommand(run)
+
 	if err := root.Execute(); err != nil {
 		log.Fatal(err.Error())
 	}
