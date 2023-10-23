@@ -110,6 +110,7 @@ exclude:
 
 - run command
 - activity plugin
+    - online and offline mode.
 - output to json file
 
 ---
