@@ -10,8 +10,9 @@
 ## Version
 
 - Every commit is tagged as a version number which is read from the git, and the version number is updated in the `Makefile` as well as the `Dockerfile`.
+- If you want to clone the project, neat info can be printed with `make info` command. (Requires make)
 
-## Example Report
+### Example Output
 
 ```json
 {
@@ -51,63 +52,7 @@
 
 ---
 
-## How-To: Use
-
-- TBD
-
-### Config
-
-- Config can be loaded from a file, or passed in as a flag. Caliber searchs for a `.caliber.yml` file in the current working directory, and if it is not found, it will use the default config.
-
-```yaml
-exclude:
-    - "github.com/example/example"
-    - "github.com/example/example"
-```
-
----
-
-## How-To: Contribute
-
-- TBD
-
----
-
-## Architecture
-
-- TBD
-
----
-
-## Notes
-
-- Command-Line Interface
-- Exclude Standard Library
-- Support Level: What level of Support is available for this library?
-- Activity: Is the library actively developed?
-    - Commit Insights
-    - Contributor Count (Recentness)
-    - Releases
-- Popularity: How many people use this library?
-    - Stargazers, if this is a GitHub hosted repository.
-- License: What kind of licensing does this library have?
-- Vulnerability: Has there been a trend of vulnerabilities with this library?
-- Maintainability: Does the library have a lot of transitive dependencies?
-- Activity
-    - Commit Insights 
-    - Contributor Count
-- Maturity
-    - Creation Date
-    - Contributor Count
-- How-To: Generate Reports (?)
-- Local DB: 
-    - (Redis)
-- Centralized Database
-    - Update Definitions Functionality
-
----
-
-## Commands
+## Supported Commands
 
 ### Run
 
@@ -115,24 +60,6 @@ Run, with default config and output to stdout.
 
 ```bash
     caliber run path=<path_to_project>
-```
-
-Run, with custom config and output to stdout.
-
-```bash
-    caliber run path=<path_to_project> load=<path_to_config>
-```
-
-Run, with default config and output to file.
-
-```bash
-    caliber run path=<path_to_project> output=<output_file_path>.json
-```
-
-Run with custom config and output to file. (load and output can be in any order)
-
-```bash
-    caliber run path=<path_to_project> load=<path_to_config> output=<output_file_path>.json
 ```
 
 ### Version 
@@ -153,11 +80,37 @@ Help for Caliber.
 
 ---
 
-## Features
+### MVP Version (v1.0.0)
 
-- Headless: Run as a Comnmand-Line Utility, Generates Report.
-- Graphical User Interface (HTMX and Go)
-- Performance Metrics from Analysis
-- External, mountable config.
+- run with activity plugin (no configs, output to report & stdout)
+- version
+- help 
+- run with 
 
 ---
+
+### Roadmap
+
+- run command with custom config
+    - Config can be loaded from a file, or passed in as a flag. Caliber searchs for a `.caliber.yml` file in the current working directory, and if it is not found, it will use the default config.
+
+```yaml
+exclude:
+    - "github.com/example/example"
+    - "github.com/example/example"
+```
+
+- support plugin
+- popularity plugin
+- maintainability plugin
+- vulnerability plugin
+- local definitions database support
+
+#### TODO 
+
+- run command
+- activity plugin
+- output to json file
+
+---
+
